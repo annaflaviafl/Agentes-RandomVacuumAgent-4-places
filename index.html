@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>REO 2 - Agentes RandomVacuumAgent 4 places</title>
+  <link rel="stylesheet" href="../styles.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+  <script type="text/javascript" src="../main.js"></script>
+
+  <script src="https://d3js.org/d3.v4.min.js"></script>
+  <style>
+    .floor:hover {
+      cursor: pointer;
+    }
+
+    .agent-actions {
+      margin-left: auto;
+      margin-right: auto;
+      border-collapse: collapse;
+    }
+
+    .agent-actions th {
+      padding: 0.5ex;
+      border: 1px solid hsl(46, 100%, 83%);
+      background: hsl(46, 100%, 83%);
+      text-align: center;
+    }
+
+    .agent-actions td {
+      padding: 0.25ex;
+      border: 1px solid hsl(46, 100%, 83%);
+      text-align: center;
+    }
+
+    .robot {
+      transition: transform 2.0s;
+    }
+
+    .floor {
+      fill: white;
+    }
+
+    .floor.clean {
+      fill: hsl(156, 48%, 79%);
+      transition: fill 2.0s;
+    }
+
+    .floor.dirty {
+      fill: hsl(0, 79%, 51%);
+      transition: fill 0.1s;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="row">
+    <div class="col-sm-6 col-md-offset-3" id="content" style="text-align:center;">
+      <h2 id="simple-cleaning-robot">REO 2 - Agentes RandomVacuumAgent 4 places</h2>
+      <h3>Anna Flávia Lopes Ferreira (201920339) - Arlan da Silva Trindade (201920353)</h3>
+
+      <h2 id="rules-to-follow">Robô de limpeza</h2>
+      <p>
+        As ações do robô estão baseadas em suas próprias regras. Para tornar uma caixa suja, basta clica-la.
+      </p>
+      <div id="agent-controlled-diagram">
+        <div style="text-align:center;">
+          <svg width="450" height="500"></svg>
+        </div>
+
+      </div>
+      <h2 id="rules-to-follow">Robô de limpeza orientado a regras</h2>
+
+      <div id="table-controlled-diagram">
+
+        <p>
+          Aqui o robô irá seguir as regras escolhidas pelo usuário. Para adicionar uma nova regra basta alterar a
+          tabela.
+        </p>
+
+        <table class="agent-actions">
+          <thead>
+            <tr>
+              <th rowspan="4" valign="bottom">Percept</th>
+              <th colspan="4">Position</th>
+            </tr>
+            <tr>
+              <th data-input="left">Left</th>
+              <th data-input="up">Up</th>
+              <th data-input="right">Right</th>
+              <th data-input="down">Down</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th data-input="clean">Clean</th>
+              <td data-action="left-clean">
+                <select class="custom-select">
+                  <option value="LEFT">LEFT</option>
+                  <option value="RIGHT">RIGHT</option>
+                  <option value="UP" selected>UP</option>
+                  <option value="DOWN">DOWN</option>
+                  <option value="SUCK">SUCK</option>
+                </select>
+              </td>
+              <td data-action="up-clean">
+                <select class="custom-select">
+                  <option value="LEFT">LEFT</option>
+                  <option value="RIGHT" selected>RIGHT</option>
+                  <option value="UP">UP</option>
+                  <option value="DOWN">DOWN</option>
+                  <option value="SUCK">SUCK</option>
+                </select>
+              </td>
+              <td data-action="right-clean">
+                <select class="custom-select">
+                  <option value="LEFT">LEFT</option>
+                  <option value="RIGHT">RIGHT</option>
+                  <option value="UP">UP</option>
+                  <option value="DOWN" selected>DOWN</option>
+                  <option value="SUCK">SUCK</option>
+                </select>
+              </td>
+              <td data-action="down-clean">
+                <select class="custom-select">
+                  <option value="LEFT" selected>LEFT</option>
+                  <option value="RIGHT">RIGHT</option>
+                  <option value="UP">UP</option>
+                  <option value="DOWN">DOWN</option>
+                  <option value="SUCK">SUCK</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <th data-input="dirty">Dirty</th>
+              <td data-action="left-dirty">
+                <select class="custom-select">
+                  <option value="LEFT">LEFT</option>
+                  <option value="RIGHT">RIGHT</option>
+                  <option value="UP">UP</option>
+                  <option value="DOWN">DOWN</option>
+                  <option value="SUCK" selected>SUCK</option>
+                </select>
+              </td>
+              <td data-action="up-dirty">
+                <select class="custom-select">
+                  <option value="LEFT">LEFT</option>
+                  <option value="RIGHT">RIGHT</option>
+                  <option value="UP">UP</option>
+                  <option value="DOWN">DOWN</option>
+                  <option value="SUCK" selected>SUCK</option>
+                </select>
+              </td>
+              <td data-action="right-dirty">
+                <select class="custom-select">
+                  <option value="LEFT">LEFT</option>
+                  <option value="RIGHT">RIGHT</option>
+                  <option value="UP">UP</option>
+                  <option value="DOWN">DOWN</option>
+                  <option value="SUCK" selected>SUCK</option>
+                </select>
+              </td>
+              <td data-action="down-dirty">
+                <select class="custom-select">
+                  <option value="LEFT">LEFT</option>
+                  <option value="RIGHT">RIGHT</option>
+                  <option value="UP">UP</option>
+                  <option value="DOWN">DOWN</option>
+                  <option value="SUCK" selected>SUCK</option>
+                </select>
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+        <div style="text-align:center">
+          <svg width="450" height="500"></svg>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="./cleaningRobot.js"></script>
+    <script type="text/javascript" src="./c_cleaningRobot.js"></script>
+</body>
+
+</html>
