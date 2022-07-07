@@ -8,7 +8,7 @@ Também se adapta as regras para o agente seguir, então por meio da tabela abai
 <br/>
 <b>Como testar:</b><br>
 Para testar o agente basta clicar duas vezes no index.html e abir em um browser, caso não abra arraste o <br>
-index.html para um navegador para abrir.
+index.html para um navegador para abrir.<br>
 ![image](https://user-images.githubusercontent.com/55205889/177670400-74ad8bcd-7cf5-4bb0-8b97-14757adc3012.png)
 
 
